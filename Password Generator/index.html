@@ -1,40 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./main.css">
+
+    <
 </head>
+
 <body>
 
-    <div class="wrapper h-screen w-screen grid place-items-center font-poppins">
+    <div class="wrapper h-screen w-screen grid place-items-center font-poppins bg-yellow-50">
 
-        <div class="main border-2 border-red-200 rounded-xl h-3/4 w-1/4 px-4 py-8 flex flex-col items-center">
-            <h1 class="text-2xl">PASSWORD GENERATOR</h1>
-            <div class="output w-4/5 h-16 bg-gray-400 rounded-2xl">
+        <div class="main bg-sky-700 rounded-xl h-3/4 w-1/4 px-4 py-8 flex flex-col items-center shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)]">
+
+            <!-- Heading -->
+            <h1 class="text-2xl font-bold text-cyan-300 ">PASSWORD <span class="text-white">GENERATOR</span></h1>
+
+            <!-- Output Window  -->
+            <div class="output w-full relative">
+                <input readonly placeholder="Password" class="w-full h-14 bg-white rounded-lg my-4 px-4 shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)]" data-passwordDisplay>
+                <button class="absolute z-20 h-10 w-10 top-6 right-0 " data-copy>
+                    <span data-copyMessage></span>
+                    <img class="aspect-square w-6" src="./assets/copy_icon.png" alt="" >
+                </button>
+            </input>
+            
             </div>
-            <input type="range" name="" id="">
-            <div class="circle">
-                <h2>26</h2>
-                <p>Password Length</p>
+            
+
+            <!-- Input Window  -->
+            <div class="relative w-full flex flex-col items-center">
+                <div
+                    class="circle relative w-52 aspect-square bg-yellow-300 rounded-full before:w-[90%] before:h-[90%] before:bg-sky-700 before:rounded-full before:absolute before:top-[5%] before:left-[5%] after:w-[110%] after:h-2/4 after:bg-sky-700 after:absolute after:top-[50%] after:left-[-5%]">
+                    <div class="absolute h-[5%] w-[5%] bg-yellow-300 rounded-b-2xl z-10 top-[50%] shadow-[inset_0px_-4px_2.0px_-2.0px_rgba(0,0,0,0.38)]"> </div>
+                    <div class="absolute h-[5%] w-[5%] bg-yellow-300 rounded-b-2xl z-10 top-[50%] right-0 shadow-[inset_0px_-4px_2.0px_-2.0px_rgba(0,0,0,0.38)]"></div>
+                    <!-- <div class="dot absolute h-[8%] w-[8%] bg-black rounded-full z-10 top-[50%] left-[-1%]"></div> -->
+                </div>
+                <div
+                    class="absolute top-[12%] aspect-square w-40 bg-yellow-300 bg-gradient-to-b rounded-full flex flex-col items-center justify-center shadow-[inset_-6px_-6px_12.0px_0.0px_rgba(0,0,0,0.38)]">
+                    <h2 class="text-5xl font-semibold" data-lengthNumber>26</h2>
+                    <p class="">Password Length</p>
+                </div>
             </div>
 
-            <div>
-                <div class="boxes"></div>
-                <div class="boxes"></div>
-                <div class="boxes"></div>
-                <div class="boxes"></div>
+            <!-- Slider  -->
+            <input type="range" min="1" max="30" value="6" step="1" class="slider appearance-none h-4 w-80" data-lengthSlider>
+
+            <!-- Include boxes  -->
+            <div class="h-20 w-full grid grid-cols-4 grid-rows-1 gap-2 m-4 text-center">
+                <input type="checkbox" id="uppercase" class="hidden">
+                <label for="uppercase">
+                    <div class="boxes bg-white flex items-center justify-center rounded-2xl p-2 leading-tight shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)] hover:bg-yellow-300 transition-all duration-200 cursor-pointer">Include <br> ABCD..</div>
+                </label>
+                <input type="checkbox" id="lowercase" class="hidden">
+                <label for="lowercase">
+                    <div class="boxes bg-white flex items-center justify-center rounded-2xl p-2 leading-tight shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)] hover:bg-yellow-300 transition-all duration-200 cursor-pointer">Include <br> abcd..</div>
+                </label>
+                <input type="checkbox" id="numeric" class="hidden">
+                <label for="numeric">
+                    <div class="boxes bg-white flex items-center justify-center rounded-2xl p-2 leading-tight shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)] hover:bg-yellow-300 transition-all duration-200 cursor-pointer">Include <br> 1234..</div>
+                </label>
+                <input type="checkbox" id="symbol" class="hidden">
+                <label for="symbol">
+                    <div class="boxes bg-white flex items-center justify-center rounded-2xl p-2 leading-tight shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)] hover:bg-yellow-300 transition-all duration-200 cursor-pointer">Include <br> @$#&..</div>
+                </label>
             </div>
+
+            <!-- Strength calculate  -->
+            <div class="flex justify-between items-center gap-x-52  p-3 px-4 rounded-2xl shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)]">
+                <p class="font-semibold text-cyan-300 text-lg">Stength</p>
+                <div data-indicator class="h-6 w-6 rounded-full bg-red-500 shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)]"></div>
+            </div>
+
+            <!-- Generate button  -->
+            <a href="">
+                <button class="h-12 w-48 bg-yellow-300 px-4 rounded-2xl mt-4 shadow-[inset_-4px_-4px_8.0px_0.0px_rgba(0,0,0,0.38)] hover:scale-105 hover:bg-cyan-300 transition-all duration-200" id = "generate-btn">
+                    Generate Password
+                </button>
+            </a>
 
 
         </div>
     </div>
 
     </div>
-    
+
+    <script src="./script.js"></script>
+
 </body>
+
 </html>
