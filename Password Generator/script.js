@@ -11,72 +11,70 @@ const indicator = document.querySelector("[data-indicator]");
 const generateButton = document.querySelector("#generate-btn");
 const allCheckBox = document.querySelectorAll("input[type=checkbox]")
 
+let symbols = "!@#$%^&*()-+/{}[]_?~':;|<>,.";
+
 let password = "";
 let passwordLength = 6;
 
-function handleSlider(){
+let checkCount = 0;
+
+
+// updating and displaying password length
+function handleSlider() {
+    if(passwordLength < checkCount){
+        passwordLength = checkCount;
+    }
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
-}
 
-async function copyContent(){
+}
+handleSlider(); // setting default length
+
+
+// funtion to copy content to clipboard
+async function copyContent() {
     try {
         await navigator.clipboard.writeText(passwordDisplay.value);
         copyMessage.innerText = "Copied";
         copyMessage.classList.add("bg-green-400", "text-green-950", "after:bg-green-400");
     }
-    catch(e) {
+    catch (e) {
         copyMessage.innerText = "Failed";
         copyMessage.classList.add("bg-red-300", "text-red-950", "after:bg-red-300");
     }
 
     copyMessage.classList.remove("hidden");
 
-    setTimeout(()=>{
+    setTimeout(() => {
         copyMessage.classList.add("hidden");
     }, 2000);
 
 }
 
-function selectCheckbox(checkboxType){
-    if(checkboxType.id == "uppercase"){
-        return checkUppercase ; 
-    }
-    else if (checkboxType.id == "lowercase"){
-        return checkLowercase;
-    }
-    else if (checkboxType.id == "numeric"){
-        return checkNumbers;
-    }
-    else if (checkboxType.id == "symbol"){
-        return checkSymbols;
-    }
+function getRandomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function checkBoxStatus(){
-    allCheckBox.forEach((checkbox) => {
-        if (checkbox.checked){
-            console.log("here");
-            console.log(selectCheckbox(checkbox));
-            selectedCheckBox.classList.remove("bg-white");
-            selectedCheckBox.classList.add("bg-yellow-300");
-            }
-            
-        });
-        // else {
-        //     if (!e.target.classList.includes("bg-white")){
-        //         e.target.classList.add("bg-white");
-        //     };
-        // }
+function generateRandomNumber() {
+    return getRandomInteger(0, 9);
 }
 
-allCheckBox.forEach((checkbox) =>{
-    checkbox.addEventListener('change', checkBoxStatus);
-});
+function generateRandomUpperCase() {
+    return String.fromCharCode(getRandomInteger(65, 91));
+}
+
+function generateRandomLowerCase() {
+    return String.fromCharCode(getRandomInteger(97, 123))
+}
+
+function generateRandomSymbol() {
+    const randNum = getRandomInteger(0, symbols.length);
+    return symbols[randNum];
+}
 
 
-inputSlider.addEventListener("input", (e)=> {
+
+inputSlider.addEventListener("input", (e) => {
     passwordLength = e.target.value;
     handleSlider();
 });
-handleSlider();
