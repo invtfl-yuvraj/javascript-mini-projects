@@ -84,6 +84,23 @@ function setIndicator(currState){
 }
 
 
+// function to handle the color of include button when clicked
+function handleIncludeClick(clickedBtn) {
+    const labelFor = clickedBtn.getAttribute('id');
+    const labelElement = document.querySelector(`label[for='${labelFor}']`);
+    const targetDiv = labelElement.querySelector('div');
+
+    if (clickedBtn.checked) {
+        targetDiv.classList.remove("bg-white", "hover:bg-cyan-300");
+        targetDiv.classList.add("bg-yellow-300", "hover:bg-yellow-300");
+    }
+    else {
+        targetDiv.classList.remove("bg-yellow-300", "hover:bg-yellow-300");
+        targetDiv.classList.add("bg-white", "hover:bg-cyan-300");
+    }
+}
+
+
 inputSlider.addEventListener("input", (e) => {
     passwordLength = e.target.value;
     handleSlider();
