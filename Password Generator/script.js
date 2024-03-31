@@ -117,6 +117,13 @@ function handleCheckCount(){
 }
 
 
+allCheckBox.forEach((checkbox) => {
+    checkbox.addEventListener('change', (e) => {
+        handleIncludeClick(e.target);
+        handleCheckCount();
+    });
+});
+
 
 inputSlider.addEventListener("input", (e) => {
     passwordLength = e.target.value;
