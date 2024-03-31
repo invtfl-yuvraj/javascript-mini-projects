@@ -101,6 +101,23 @@ function handleIncludeClick(clickedBtn) {
 }
 
 
+function handleCheckCount(){
+    checkCount = 0;
+    allCheckBox.forEach((checkbox) => {
+        if(checkbox.checked){
+            checkCount++;
+        }
+    });
+
+    // making default pass len;
+    if(passwordLength < checkCount){
+        passwordLength = checkCount;
+        handleSlider();
+    }
+}
+
+
+
 inputSlider.addEventListener("input", (e) => {
     passwordLength = e.target.value;
     handleSlider();
