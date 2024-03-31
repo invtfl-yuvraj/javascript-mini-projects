@@ -72,6 +72,16 @@ function generateRandomSymbol() {
     return symbols[randNum];
 }
 
+function setIndicator(currState){
+    const state = ["bg-white", "bg-red-500", "bg--500", "bg-yellow-500"]
+    
+    state.forEach((color) => {
+        if (indicator.classList.contains(color) != state[currState]){
+            indicator.classList.remove(color);
+            indicator.classList.add(state[currState]);
+        }
+    }); 
+}
 
 
 inputSlider.addEventListener("input", (e) => {
