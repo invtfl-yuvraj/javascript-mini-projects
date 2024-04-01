@@ -200,3 +200,8 @@ function shufflePassword(array) {
     return str;
 }
 
+copyButton.addEventListener('click', () => {
+    if(passwordDisplay.value)
+        copyContent();
+})
+
