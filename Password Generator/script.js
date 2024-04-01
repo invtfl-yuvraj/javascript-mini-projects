@@ -157,3 +157,33 @@ inputSlider.addEventListener("input", (e) => {
     // setIndicator(strengthCalculate());
 });
 
+function strengthCalculate() {
+    let hasUpper = false;
+    let hasLower = false;
+    let hasNumber = false;
+    let hasSymbol = false;
+    if (checkUppercase.checked) hasUpper = true;
+    if (checkLowercase.checked) hasLower = true;
+    if (checkNumbers.checked) hasNumber = true;
+    if (checkSymbols.checked) hasSymbol = true;
+
+    if(!hasUpper && !hasLower && !hasNumber && !hasSymbol){
+        return 0;
+    }
+    else if (hasUpper && hasLower && hasNumber && hasSymbol && passwordLength >= 8) {
+      return 5;
+    }
+    else if (hasUpper && hasLower && (hasNumber || hasSymbol) && passwordLength >= 6){
+        return 4;
+    }
+    else if ((hasLower || hasUpper) && (hasNumber || hasSymbol) && passwordLength >= 6) {
+      return 3;
+    }
+    else if ((hasLower || hasUpper || hasNumber || hasSymbol) && passwordLength >= 4) {
+        return 2;
+    }
+    else {
+        return 1;
+    }
+}
+
