@@ -27,6 +27,26 @@ function handleSlider() {
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
 
+    const min = inputSlider.min;
+    const max = inputSlider.max;
+
+    console.log(min);
+    console.log(max);
+
+    let bgSize = "";
+
+    if (inputSlider.value <= 2){
+        bgSize = ((passwordLength - min)*100/(max - min) + 10) + "% 100%";
+    }
+    else if (inputSlider.value >= 24){
+        bgSize = ((passwordLength - min)*100/(max - min) - 10) + "% 100%";
+    }
+    else {
+        bgSize = ((passwordLength - min)*100/(max - min)) + "% 100%";
+    }
+
+    inputSlider.style.backgroundSize = bgSize;
+
 }
 handleSlider(); // setting default length
 
@@ -72,16 +92,21 @@ function generateRandomSymbol() {
     return symbols[randNum];
 }
 
-function setIndicator(currState){
-    const state = ["bg-white", "bg-red-500", "bg--500", "bg-yellow-500"]
+function setIndicator(currState = 0){
+    const state = ["white", "red-600", "orange-500", "yellow-500","lime-500","green-600"];
+    const msg = ["", "Too Weak!!", "Weak!!", "Moderate!!", "Strong!!", "Too Strong!!"];
     
     state.forEach((color) => {
-        if (indicator.classList.contains(color) != state[currState]){
-            indicator.classList.remove(color);
-            indicator.classList.add(state[currState]);
+        if (indicator.classList.contains("bg-" + color) != ("bg-" + state[currState])){
+            indicator.classList.remove("bg-" + color);
+            indicator.classList.add("bg-" + state[currState]);
+            indicator.firstChild.classList.remove("text-" + color);
+            indicator.firstChild.classList.add("text-" + state[currState]);
+            indicator.firstChild.innerText = msg[currState];
         }
     }); 
 }
+
 
 
 // function to handle the color of include button when clicked
@@ -91,12 +116,12 @@ function handleIncludeClick(clickedBtn) {
     const targetDiv = labelElement.querySelector('div');
 
     if (clickedBtn.checked) {
-        targetDiv.classList.remove("bg-white", "hover:bg-cyan-300");
-        targetDiv.classList.add("bg-yellow-300", "hover:bg-yellow-300");
+        targetDiv.classList.remove("bg-cyan-300");
+        targetDiv.classList.add("bg-yellow-300");
     }
     else {
-        targetDiv.classList.remove("bg-yellow-300", "hover:bg-yellow-300");
-        targetDiv.classList.add("bg-white", "hover:bg-cyan-300");
+        targetDiv.classList.remove("bg-yellow-300");
+        targetDiv.classList.add("bg-cyan-300");
     }
 }
 
@@ -121,6 +146,7 @@ allCheckBox.forEach((checkbox) => {
     checkbox.addEventListener('change', (e) => {
         handleIncludeClick(e.target);
         handleCheckCount();
+        // setIndicator(strengthCalculate());
     });
 });
 
@@ -128,4 +154,6 @@ allCheckBox.forEach((checkbox) => {
 inputSlider.addEventListener("input", (e) => {
     passwordLength = e.target.value;
     handleSlider();
+    // setIndicator(strengthCalculate());
 });
+
