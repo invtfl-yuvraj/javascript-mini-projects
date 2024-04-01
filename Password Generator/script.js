@@ -205,3 +205,50 @@ copyButton.addEventListener('click', () => {
         copyContent();
 })
 
+
+generateButton.addEventListener("click", (event)=>{
+    event.preventDefault();
+
+    if (checkCount == 0){
+        return;
+    }
+
+    password = "";
+    let includedItemsArr = [];    
+
+    if (checkUppercase.checked){
+        includedItemsArr.push(generateRandomUpperCase);
+    }
+    if (checkLowercase.checked){
+        includedItemsArr.push(generateRandomLowerCase);
+    }
+    if (checkNumbers.checked){
+        includedItemsArr.push(generateRandomNumber);
+    }
+    if (checkSymbols.checked){
+        includedItemsArr.push(generateRandomSymbol);
+    }
+
+    let size = includedItemsArr.length;
+
+    // if(size ==)
+
+    // compulsory letters
+    for(let i = 0; i< size; i++){
+        password += includedItemsArr[i]();
+    }
+
+    for (let i = 0; i < passwordLength - size; i++){
+        let randIndex = getRandomInteger(0 , size);
+        password += includedItemsArr[randIndex]();
+        // console.log("randomIndex" + randIndex);
+    }
+
+    password = shufflePassword(Array.from(password));
+
+    passwordDisplay.value = password;
+    setIndicator(strengthCalculate());
+
+    console.log("Password Generated !!!");
+
+});
